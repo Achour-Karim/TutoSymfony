@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title  %}toutes les recettees{% endblock %}
+{% block body %}
+<p>
+Par défaut cette commande installe une
+ version "vide" de Symfony dans laquelle 
+ on peut charger les modules que l'on souhaite
+  utiliser. Pour ajouter tous les composants
+   nécessaires à la création d'une application
+    web on va se rendre dans le dossier du
+     projet et utiliser la commande :
+   </p>  
+   <p>
+          <a class="btn btn-primary btn-sm" href="{{ path('recipe.create') }}"> create</a>
+
+   </p>
+  <table class="table">
+  <thead>
+  <tr>
+  <th >Titre</th>
+  <th>Actions </th>
+  </tr>
+  </thead>
+  <tbody>
+   <ul>
+   {%
+    for recipe in recipes
+   %}
+        <tr>
+        <td>
+        <a href="{{ path('recipe.show', {id: recipe.id, slug: recipe.slug}) }}"> {{recipe.text}} </a>
+       </td>
+       <td>
+       <div class="d-flex gap-1">
+       <a class="btn btn-primary btn-sm" href="{{ path('recipe.edit', {id: recipe.id}) }}"> Editer</a>
+       <form method="post" action="{{ path('recipe.delete',{ 'id': recipe.id }) }}" 
+       onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette recette ?');"> 
+       <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+        </form>
+        </div>
+       </td>
+        </tr>
+
+      {% endfor %} 
+      </tbody>
+      </table>
+      </ul>
+
+
+{% endblock %}

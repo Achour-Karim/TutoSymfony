@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-              echo 'build'
+              echo 'build  at 10 min in day '
             }
         }
     stage('test') {
